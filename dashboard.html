@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KVG Matrimony | Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Common CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .dashboard-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 28px;
+      margin: 110px 0 20px;
+      color: #fff;
+    }
+
+    .dashboard-wrap {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 20px;
+    }
+
+    .sidebar {
+      background: #e6f4ec;
+      border-radius: 18px;
+      padding: 20px;
+      min-height: 400px;
+    }
+
+    .search-bar {
+      background: #dff2e8;
+      border-radius: 30px;
+      padding: 10px 15px;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input,
+    .search-bar select {
+      border: none;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .search-btn {
+      background: #198754;
+      color: #fff;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      border: none;
+    }
+
+    .profile-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .profile-card:hover {
+      border: 1px solid #198754;
+      transform: scale(1.01);
+    }
+
+    .profile-img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #d9d9d9;
+      flex-shrink: 0;
+    }
+
+    .badge-green {
+      color: #198754;
+      font-size: 12px;
+      margin-right: 10px;
+    }
+
+    /* 🔥 RESPONSIVE FIXES 🔥 */
+    @media (max-width: 992px) {
+      .dashboard-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        order: 2;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-title {
+        font-size: 22px;
+        margin-top: 90px;
+      }
+
+      .search-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .search-btn {
+        width: 100%;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top main-navbar">
+  <div class="container-fluid px-4">
+
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <div class="logo-icon me-2">
+       <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Background -->
+          <circle cx="100" cy="100" r="85" fill="#c9cdc6"/>
+
+          <!-- Eye Group -->
+          <g transform-origin="100px 100px">
+
+            <!-- Upper eyelid -->
+            <path
+              d="M55 80 Q100 65 145 78"
+              stroke="#1e2321"
+              stroke-width="10"
+              fill="none"
+              stroke-linecap="round">
+              <animateTransform
+                attributeName="transform"
+                type="translate"
+                values="0 0;0 0;0 18;0 0;0 0"
+                keyTimes="0;0.75;0.8;0.85;1"
+                dur="3s"
+                repeatCount="indefinite"/>
+            </path>
+
+            <!-- Lower eyelid -->
+            <path
+              d="M60 95 Q100 120 140 95"
+              stroke="#1e2321"
+              stroke-width="10"
+              fill="none"
+              stroke-linecap="round"/>
+
+            <!-- Eyelashes -->
+            <g>
+              <path d="M78 108 Q72 120 66 128" stroke="#1e2321" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M90 110 Q88 125 85 132" stroke="#1e2321" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M102 112 Q102 128 102 135" stroke="#1e2321" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M114 110 Q118 125 122 132" stroke="#1e2321" stroke-width="7" fill="none" stroke-linecap="round"/>
+              <path d="M126 108 Q136 120 142 128" stroke="#1e2321" stroke-width="7" fill="none" stroke-linecap="round"/>
+
+              <animate
+                attributeName="opacity"
+                values="1;1;0;1;1"
+                keyTimes="0;0.75;0.8;0.85;1"
+                dur="3s"
+                repeatCount="indefinite"/>
+            </g>
+
+          </g>
+        </svg>
+      </div>
+      KVG Matrimony
+    </a>
+
+    <button class="navbar-toggler bg-light" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navMenu"
+      aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav align-items-lg-center w-100">
+        <li class="nav-item"><a class="nav-link brand-font active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link brand-font" href="#">About</a></li>
+        <li class="nav-item"><a class="nav-link brand-font" href="#">Contact</a></li>
+        <li class="nav-item"><a class="nav-link brand-font" href="#">Payment</a></li>
+        <li class="nav-item"><a class="nav-link brand-font" href="#">Subscription</a></li>
+        <li class="nav-item ms-auto">
+          <a class="btn btn-outline-light brand-font" href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <h2 class="dashboard-title text-center">Browse Matrimony Profiles</h2>
+  <hr class="text-white">
+
+  <div class="dashboard-wrap">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+      <h6 class="brand-font mb-3">Profile Details</h6>
+
+      <div class="text-center mb-3">
+        <div class="profile-img mx-auto"></div>
+      </div>
+
+      <p><b>Name:</b> <span id="d-name">Select a profile</span></p>
+      <p><b>Age:</b> <span id="d-age">-</span></p>
+      <p><b>Location:</b> <span id="d-location">-</span></p>
+      <p><b>Profession:</b> <span id="d-job">-</span></p>
+      <p><b>Intent:</b> <span id="d-intent">-</span></p>
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+
+      <div class="search-bar">
+        <input placeholder="Search">
+        <select><option>Age</option></select>
+        <select><option>Location</option></select>
+        <select><option>Profession</option></select>
+        <button class="search-btn"><i class="bi bi-search"></i></button>
+      </div>
+
+      <div class="profile-card"
+        onclick="showProfile('Digeesh',24,'Delhi','IT Professional','Serious Marriage')">
+        <div class="profile-img"></div>
+        <div>
+          <h6>Digeesh, 24</h6>
+          <small>Delhi · IT Professional</small><br>
+          <span class="badge-green">✔ Verified</span>
+          <span class="badge-green">❤ Normal</span>
+        </div>
+      </div>
+
+      <div class="profile-card"
+        onclick="showProfile('Ranjith',31,'Bengaluru','Engineer','Serious Marriage')">
+        <div class="profile-img"></div>
+        <div>
+          <h6>Gemini, 31</h6>
+          <small>Bengaluru · Engineer</small><br>
+          <span class="badge-green">✔ Verified</span>
+          <span class="badge-green">❤ Very Serious Even for male</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- MOBILE PROFILE DETAILS -->
+<div class="mobile-details" id="mobileDetails">
+  <div class="mobile-header">
+    <span>Profile Details</span>
+    <button onclick="closeMobileDetails()">✕</button>
+  </div>
+
+  <div class="text-center my-3">
+    <div class="profile-img mx-auto"></div>
+  </div>
+
+  <p><b>Name:</b> <span id="m-name"></span></p>
+  <p><b>Age:</b> <span id="m-age"></span></p>
+  <p><b>Location:</b> <span id="m-location"></span></p>
+  <p><b>Profession:</b> <span id="m-job"></span></p>
+  <p><b>Intent:</b> <span id="m-intent"></span></p>
+</div>
+
+
+<!-- 🔥 BOOTSTRAP JS (REQUIRED) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  function showProfile(name, age, location, job, intent) {
+
+    // Desktop sidebar
+    const dName = document.getElementById("d-name");
+    if (dName) {
+      dName.innerText = name;
+      document.getElementById("d-age").innerText = age;
+      document.getElementById("d-location").innerText = location;
+      document.getElementById("d-job").innerText = job;
+      document.getElementById("d-intent").innerText = intent;
+    }
+
+    // Mobile panel
+    document.getElementById("m-name").innerText = name;
+    document.getElementById("m-age").innerText = age;
+    document.getElementById("m-location").innerText = location;
+    document.getElementById("m-job").innerText = job;
+    document.getElementById("m-intent").innerText = intent;
+
+    document.getElementById("mobileDetails").classList.add("show");
+  }
+
+  function closeMobileDetails() {
+    document.getElementById("mobileDetails").classList.remove("show");
+  }
+</script>
+
+
+
+</body>
+</html>
